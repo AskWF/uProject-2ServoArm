@@ -10,6 +10,7 @@
 //OLED can display 21 characters in each row and 7 rows down.
 
 int cliflag = 0;
+int intCount = 0;
 
 static inline void initTimer1Servo(void) {
 	/* Set up Timer1 (16bit) to give a pulse every 20ms */
@@ -64,7 +65,7 @@ int main(void){
 
   
   while(1){
-	char adc_string[2]; //Buffer for array where ADC value will be stored as string.
+	char itoa_buffer[2]; //Buffer for array where ADC value will be stored as string.
 	int joystick;
 	
 	/*Very simple debounce*/
@@ -73,35 +74,43 @@ int main(void){
 	}
 	else{
 		cli(); //Close
-		_delay_ms(1000);
+		intCount++;
+		itoa(intCount, itoa_buffer, 10);
+		lcd_gotoxy(0,6);
+		lcd_puts("Interrupt counter: ");
+		lcd_puts(itoa_buffer);
+		_delay_ms(200);
 		cliflag = 0;
 	}
 	   
 	joystick = startConversion(); //New ADC reading
-	itoa(joystick, adc_string, 10); //Converts ADC to string
+	itoa(joystick, itoa_buffer, 10); //Converts ADC to string
 	lcd_gotoxy(9,1); //Coordinates to print
-	lcd_puts(adc_string); //Prints ADC to selected coordinate
+	lcd_puts(itoa_buffer); //Prints ADC to selected coordinate
 	OCR1A = joystick*13 + 800; //Sends a scaled ADC value to PB1 to create an appropriate waveform for the servo.
     		
 	ADMUX |= (1<<MUX0); //Switches from ADC0 to ADC1
 	
 	joystick = startConversion(); //New ADC reading
 	lcd_gotoxy(9,3);
-	itoa(joystick, adc_string, 10);
-	lcd_puts(adc_string);
+	itoa(joystick, itoa_buffer, 10);
+	lcd_puts(itoa_buffer);
 	OCR1B = joystick*13 + 800;
     		
 	ADMUX &= ~(1<<MUX0); //Switches from ADC1 back to ADC0
+	
+
   }
   return 0;
   
 }
 
 ISR(INT0_vect){
-	lcd_clrscr();
+	/*lcd_clrscr();
 	lcd_puts("interrupt!!");
-	/*OCR1A = 800;
-	OCR1B = 5000;*/
-	lcd_clrscr();
+	OCR1A = 800;
+	OCR1B = 5000;
+	lcd_clrscr();*/
+	//intCount++;
 	cliflag = 1;
 }

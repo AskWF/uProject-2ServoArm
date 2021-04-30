@@ -3,38 +3,38 @@ MicroProsjektAsk.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000020  00800100  00000bb8  00000c4c  2**0
+  0 .data         00000028  00800100  00000bb8  00000c4c  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         00000bb8  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000005  00800120  00800120  00000c6c  2**0
+  2 .bss          00000007  00800128  00800128  00000c74  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  00000c6c  2**0
+  3 .comment      00000030  00000000  00000000  00000c74  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000c9c  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000ca4  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000120  00000000  00000000  00000cdc  2**0
+  5 .debug_aranges 00000120  00000000  00000000  00000ce4  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000016dd  00000000  00000000  00000dfc  2**0
+  6 .debug_info   00001749  00000000  00000000  00000e04  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000ac2  00000000  00000000  000024d9  2**0
+  7 .debug_abbrev 00000ac0  00000000  00000000  0000254d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00000b52  00000000  00000000  00002f9b  2**0
+  8 .debug_line   00000b5e  00000000  00000000  0000300d  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000300  00000000  00000000  00003af0  2**2
+  9 .debug_frame  000002cc  00000000  00000000  00003b6c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00000655  00000000  00000000  00003df0  2**0
+ 10 .debug_str    0000065f  00000000  00000000  00003e38  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    00000cff  00000000  00000000  00004445  2**0
+ 11 .debug_loc    00000c7d  00000000  00000000  00004497  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000108  00000000  00000000  00005144  2**0
+ 12 .debug_ranges 00000108  00000000  00000000  00005114  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
 00000000 <__vectors>:
    0:	0c 94 84 01 	jmp	0x308	; 0x308 <__ctors_end>
-   4:	0c 94 6a 05 	jmp	0xad4	; 0xad4 <__vector_1>
+   4:	0c 94 86 05 	jmp	0xb0c	; 0xb0c <__vector_1>
    8:	0c 94 a1 01 	jmp	0x342	; 0x342 <__bad_interrupt>
    c:	0c 94 a1 01 	jmp	0x342	; 0x342 <__bad_interrupt>
   10:	0c 94 a1 01 	jmp	0x342	; 0x342 <__bad_interrupt>
@@ -135,13 +135,13 @@ Disassembly of section .text:
  31e:	02 c0       	rjmp	.+4      	; 0x324 <__do_copy_data+0x10>
  320:	05 90       	lpm	r0, Z+
  322:	0d 92       	st	X+, r0
- 324:	a0 32       	cpi	r26, 0x20	; 32
+ 324:	a8 32       	cpi	r26, 0x28	; 40
  326:	b1 07       	cpc	r27, r17
  328:	d9 f7       	brne	.-10     	; 0x320 <__do_copy_data+0xc>
 
 0000032a <__do_clear_bss>:
  32a:	21 e0       	ldi	r18, 0x01	; 1
- 32c:	a0 e2       	ldi	r26, 0x20	; 32
+ 32c:	a8 e2       	ldi	r26, 0x28	; 40
  32e:	b1 e0       	ldi	r27, 0x01	; 1
  330:	01 c0       	rjmp	.+2      	; 0x334 <.do_clear_bss_start>
 
@@ -149,7 +149,7 @@ Disassembly of section .text:
  332:	1d 92       	st	X+, r1
 
 00000334 <.do_clear_bss_start>:
- 334:	a5 32       	cpi	r26, 0x25	; 37
+ 334:	af 32       	cpi	r26, 0x2F	; 47
  336:	b2 07       	cpc	r27, r18
  338:	e1 f7       	brne	.-8      	; 0x332 <.do_clear_bss_loop>
  33a:	0e 94 b3 04 	call	0x966	; 0x966 <main>
@@ -175,9 +175,9 @@ Disassembly of section .text:
  364:	21 50       	subi	r18, 0x01	; 1
  366:	31 09       	sbc	r19, r1
  368:	31 f4       	brne	.+12     	; 0x376 <i2c_start+0x1e>
- 36a:	80 91 24 01 	lds	r24, 0x0124	; 0x800124 <I2C_ErrorCode>
+ 36a:	80 91 2e 01 	lds	r24, 0x012E	; 0x80012e <I2C_ErrorCode>
  36e:	81 60       	ori	r24, 0x01	; 1
- 370:	80 93 24 01 	sts	0x0124, r24	; 0x800124 <I2C_ErrorCode>
+ 370:	80 93 2e 01 	sts	0x012E, r24	; 0x80012e <I2C_ErrorCode>
  374:	08 95       	ret
  376:	90 91 bc 00 	lds	r25, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
  37a:	99 23       	and	r25, r25
@@ -193,9 +193,9 @@ Disassembly of section .text:
  392:	08 c0       	rjmp	.+16     	; 0x3a4 <i2c_start+0x4c>
  394:	01 97       	sbiw	r24, 0x01	; 1
  396:	31 f4       	brne	.+12     	; 0x3a4 <i2c_start+0x4c>
- 398:	80 91 24 01 	lds	r24, 0x0124	; 0x800124 <I2C_ErrorCode>
+ 398:	80 91 2e 01 	lds	r24, 0x012E	; 0x80012e <I2C_ErrorCode>
  39c:	82 60       	ori	r24, 0x02	; 2
- 39e:	80 93 24 01 	sts	0x0124, r24	; 0x800124 <I2C_ErrorCode>
+ 39e:	80 93 2e 01 	sts	0x012E, r24	; 0x80012e <I2C_ErrorCode>
  3a2:	08 95       	ret
  3a4:	20 91 bc 00 	lds	r18, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
  3a8:	22 23       	and	r18, r18
@@ -218,9 +218,9 @@ Disassembly of section .text:
  3c8:	08 c0       	rjmp	.+16     	; 0x3da <i2c_byte+0x20>
  3ca:	01 97       	sbiw	r24, 0x01	; 1
  3cc:	31 f4       	brne	.+12     	; 0x3da <i2c_byte+0x20>
- 3ce:	80 91 24 01 	lds	r24, 0x0124	; 0x800124 <I2C_ErrorCode>
+ 3ce:	80 91 2e 01 	lds	r24, 0x012E	; 0x80012e <I2C_ErrorCode>
  3d2:	84 60       	ori	r24, 0x04	; 4
- 3d4:	80 93 24 01 	sts	0x0124, r24	; 0x800124 <I2C_ErrorCode>
+ 3d4:	80 93 2e 01 	sts	0x012E, r24	; 0x80012e <I2C_ErrorCode>
  3d8:	08 95       	ret
  3da:	20 91 bc 00 	lds	r18, 0x00BC	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
  3de:	22 23       	and	r18, r18
@@ -303,7 +303,7 @@ Disassembly of section .text:
  47c:	18 f5       	brcc	.+70     	; 0x4c4 <lcd_goto_xpix_y+0x58>
  47e:	68 30       	cpi	r22, 0x08	; 8
  480:	08 f5       	brcc	.+66     	; 0x4c4 <lcd_goto_xpix_y+0x58>
- 482:	e0 e2       	ldi	r30, 0x20	; 32
+ 482:	e8 e2       	ldi	r30, 0x28	; 40
  484:	f1 e0       	ldi	r31, 0x01	; 1
  486:	80 83       	st	Z, r24
  488:	61 83       	std	Z+1, r22	; 0x01
@@ -483,7 +483,7 @@ Disassembly of section .text:
  5e2:	09 f4       	brne	.+2      	; 0x5e6 <lcd_putc+0x36>
  5e4:	47 c0       	rjmp	.+142    	; 0x674 <lcd_putc+0xc4>
  5e6:	4c c0       	rjmp	.+152    	; 0x680 <lcd_putc+0xd0>
- 5e8:	00 e2       	ldi	r16, 0x20	; 32
+ 5e8:	08 e2       	ldi	r16, 0x28	; 40
  5ea:	11 e0       	ldi	r17, 0x01	; 1
  5ec:	f8 01       	movw	r30, r16
  5ee:	80 81       	ld	r24, Z
@@ -500,7 +500,7 @@ Disassembly of section .text:
  60c:	89 1b       	sub	r24, r25
  60e:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
  612:	78 c1       	rjmp	.+752    	; 0x904 <__stack+0x5>
- 614:	80 91 20 01 	lds	r24, 0x0120	; 0x800120 <__data_end>
+ 614:	80 91 28 01 	lds	r24, 0x0128	; 0x800128 <__data_end>
  618:	90 91 00 01 	lds	r25, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
  61c:	29 2f       	mov	r18, r25
  61e:	30 e0       	ldi	r19, 0x00	; 0
@@ -521,28 +521,28 @@ Disassembly of section .text:
  63c:	40 f4       	brcc	.+16     	; 0x64e <lcd_putc+0x9e>
  63e:	99 0f       	add	r25, r25
  640:	99 0f       	add	r25, r25
- 642:	60 91 21 01 	lds	r22, 0x0121	; 0x800121 <__data_end+0x1>
+ 642:	60 91 29 01 	lds	r22, 0x0129	; 0x800129 <__data_end+0x1>
  646:	89 0f       	add	r24, r25
  648:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
  64c:	5b c1       	rjmp	.+694    	; 0x904 <__stack+0x5>
- 64e:	60 91 21 01 	lds	r22, 0x0121	; 0x800121 <__data_end+0x1>
+ 64e:	60 91 29 01 	lds	r22, 0x0129	; 0x800129 <__data_end+0x1>
  652:	85 e1       	ldi	r24, 0x15	; 21
  654:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
  658:	55 c1       	rjmp	.+682    	; 0x904 <__stack+0x5>
- 65a:	80 91 21 01 	lds	r24, 0x0121	; 0x800121 <__data_end+0x1>
+ 65a:	80 91 29 01 	lds	r24, 0x0129	; 0x800129 <__data_end+0x1>
  65e:	87 30       	cpi	r24, 0x07	; 7
  660:	08 f0       	brcs	.+2      	; 0x664 <lcd_putc+0xb4>
  662:	50 c1       	rjmp	.+672    	; 0x904 <__stack+0x5>
  664:	60 91 00 01 	lds	r22, 0x0100	; 0x800100 <__DATA_REGION_ORIGIN__>
  668:	68 0f       	add	r22, r24
- 66a:	80 91 20 01 	lds	r24, 0x0120	; 0x800120 <__data_end>
+ 66a:	80 91 28 01 	lds	r24, 0x0128	; 0x800128 <__data_end>
  66e:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
  672:	48 c1       	rjmp	.+656    	; 0x904 <__stack+0x5>
- 674:	60 91 21 01 	lds	r22, 0x0121	; 0x800121 <__data_end+0x1>
+ 674:	60 91 29 01 	lds	r22, 0x0129	; 0x800129 <__data_end+0x1>
  678:	80 e0       	ldi	r24, 0x00	; 0
  67a:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
  67e:	42 c1       	rjmp	.+644    	; 0x904 <__stack+0x5>
- 680:	50 91 20 01 	lds	r21, 0x0120	; 0x800120 <__data_end>
+ 680:	50 91 28 01 	lds	r21, 0x0128	; 0x800128 <__data_end>
  684:	5a 37       	cpi	r21, 0x7A	; 122
  686:	08 f0       	brcs	.+2      	; 0x68a <lcd_putc+0xda>
  688:	3d c1       	rjmp	.+634    	; 0x904 <__stack+0x5>
@@ -718,7 +718,7 @@ Disassembly of section .text:
  7de:	ce 01       	movw	r24, r28
  7e0:	01 96       	adiw	r24, 0x01	; 1
  7e2:	0e 94 12 02 	call	0x424	; 0x424 <lcd_data>
- 7e6:	e0 e2       	ldi	r30, 0x20	; 32
+ 7e6:	e8 e2       	ldi	r30, 0x28	; 40
  7e8:	f1 e0       	ldi	r31, 0x01	; 1
  7ea:	81 81       	ldd	r24, Z+1	; 0x01
  7ec:	8f 54       	subi	r24, 0x4F	; 79
@@ -780,7 +780,7 @@ Disassembly of section .text:
  85e:	ce 01       	movw	r24, r28
  860:	01 96       	adiw	r24, 0x01	; 1
  862:	0e 94 12 02 	call	0x424	; 0x424 <lcd_data>
- 866:	00 e2       	ldi	r16, 0x20	; 32
+ 866:	08 e2       	ldi	r16, 0x28	; 40
  868:	11 e0       	ldi	r17, 0x01	; 1
  86a:	f8 01       	movw	r30, r16
  86c:	81 81       	ldd	r24, Z+1	; 0x01
@@ -852,7 +852,7 @@ Disassembly of section .text:
  8f2:	ce 01       	movw	r24, r28
  8f4:	01 96       	adiw	r24, 0x01	; 1
  8f6:	0e 94 12 02 	call	0x424	; 0x424 <lcd_data>
- 8fa:	e0 e2       	ldi	r30, 0x20	; 32
+ 8fa:	e8 e2       	ldi	r30, 0x28	; 40
  8fc:	f1 e0       	ldi	r31, 0x01	; 1
  8fe:	80 81       	ld	r24, Z
  900:	8a 5f       	subi	r24, 0xFA	; 250
@@ -966,7 +966,7 @@ static inline void initADC(void) {
  998:	80 83       	st	Z, r24
 	startConversion();
  99a:	0e 94 9e 04 	call	0x93c	; 0x93c <startConversion>
-int cliflag = 0;
+int intCount = 0;
 
 static inline void initTimer1Servo(void) {
 	/* Set up Timer1 (16bit) to give a pulse every 20ms */
@@ -1051,166 +1051,168 @@ int main(void){
  a10:	00 c0       	rjmp	.+0      	; 0xa12 <main+0xac>
  a12:	00 00       	nop
   while(1){
-	char adc_string[2]; //Buffer for array where ADC value will be stored as string.
+	char itoa_buffer[2]; //Buffer for array where ADC value will be stored as string.
 	int joystick;
 	
 	/*Very simple debounce*/
 	if(cliflag == 0){
- a14:	80 91 22 01 	lds	r24, 0x0122	; 0x800122 <cliflag>
- a18:	90 91 23 01 	lds	r25, 0x0123	; 0x800123 <cliflag+0x1>
+ a14:	80 91 2c 01 	lds	r24, 0x012C	; 0x80012c <cliflag>
+ a18:	90 91 2d 01 	lds	r25, 0x012D	; 0x80012d <cliflag+0x1>
  a1c:	89 2b       	or	r24, r25
  a1e:	11 f4       	brne	.+4      	; 0xa24 <main+0xbe>
 		sei(); //Set external interrupts
  a20:	78 94       	sei
- a22:	0e c0       	rjmp	.+28     	; 0xa40 <main+0xda>
+ a22:	2a c0       	rjmp	.+84     	; 0xa78 <main+0x112>
 	}
 	else{
 		cli(); //Close
  a24:	f8 94       	cli
- a26:	8f ef       	ldi	r24, 0xFF	; 255
- a28:	93 ed       	ldi	r25, 0xD3	; 211
- a2a:	e0 e3       	ldi	r30, 0x30	; 48
- a2c:	81 50       	subi	r24, 0x01	; 1
- a2e:	90 40       	sbci	r25, 0x00	; 0
- a30:	e0 40       	sbci	r30, 0x00	; 0
- a32:	e1 f7       	brne	.-8      	; 0xa2c <main+0xc6>
- a34:	00 c0       	rjmp	.+0      	; 0xa36 <main+0xd0>
- a36:	00 00       	nop
-		_delay_ms(1000);
+		intCount++;
+ a26:	80 91 2a 01 	lds	r24, 0x012A	; 0x80012a <intCount>
+ a2a:	90 91 2b 01 	lds	r25, 0x012B	; 0x80012b <intCount+0x1>
+ a2e:	01 96       	adiw	r24, 0x01	; 1
+ a30:	90 93 2b 01 	sts	0x012B, r25	; 0x80012b <intCount+0x1>
+ a34:	80 93 2a 01 	sts	0x012A, r24	; 0x80012a <intCount>
+		itoa(intCount, itoa_buffer, 10);
+ a38:	4a e0       	ldi	r20, 0x0A	; 10
+ a3a:	50 e0       	ldi	r21, 0x00	; 0
+ a3c:	be 01       	movw	r22, r28
+ a3e:	6f 5f       	subi	r22, 0xFF	; 255
+ a40:	7f 4f       	sbci	r23, 0xFF	; 255
+ a42:	0e 94 9a 05 	call	0xb34	; 0xb34 <itoa>
+		lcd_gotoxy(0,6);
+ a46:	66 e0       	ldi	r22, 0x06	; 6
+ a48:	80 e0       	ldi	r24, 0x00	; 0
+ a4a:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
+		lcd_puts("Interrupt counter: ");
+ a4e:	84 e1       	ldi	r24, 0x14	; 20
+ a50:	91 e0       	ldi	r25, 0x01	; 1
+ a52:	0e 94 91 04 	call	0x922	; 0x922 <lcd_puts>
+		lcd_puts(itoa_buffer);
+ a56:	ce 01       	movw	r24, r28
+ a58:	01 96       	adiw	r24, 0x01	; 1
+ a5a:	0e 94 91 04 	call	0x922	; 0x922 <lcd_puts>
+ a5e:	8f ef       	ldi	r24, 0xFF	; 255
+ a60:	93 ec       	ldi	r25, 0xC3	; 195
+ a62:	e9 e0       	ldi	r30, 0x09	; 9
+ a64:	81 50       	subi	r24, 0x01	; 1
+ a66:	90 40       	sbci	r25, 0x00	; 0
+ a68:	e0 40       	sbci	r30, 0x00	; 0
+ a6a:	e1 f7       	brne	.-8      	; 0xa64 <main+0xfe>
+ a6c:	00 c0       	rjmp	.+0      	; 0xa6e <main+0x108>
+ a6e:	00 00       	nop
+		_delay_ms(200);
 		cliflag = 0;
- a38:	10 92 23 01 	sts	0x0123, r1	; 0x800123 <cliflag+0x1>
- a3c:	10 92 22 01 	sts	0x0122, r1	; 0x800122 <cliflag>
+ a70:	10 92 2d 01 	sts	0x012D, r1	; 0x80012d <cliflag+0x1>
+ a74:	10 92 2c 01 	sts	0x012C, r1	; 0x80012c <cliflag>
 	}
 	   
 	joystick = startConversion(); //New ADC reading
- a40:	0e 94 9e 04 	call	0x93c	; 0x93c <startConversion>
- a44:	8c 01       	movw	r16, r24
-	itoa(joystick, adc_string, 10); //Converts ADC to string
- a46:	4a e0       	ldi	r20, 0x0A	; 10
- a48:	50 e0       	ldi	r21, 0x00	; 0
- a4a:	be 01       	movw	r22, r28
- a4c:	6f 5f       	subi	r22, 0xFF	; 255
- a4e:	7f 4f       	sbci	r23, 0xFF	; 255
- a50:	0e 94 9a 05 	call	0xb34	; 0xb34 <itoa>
+ a78:	0e 94 9e 04 	call	0x93c	; 0x93c <startConversion>
+ a7c:	8c 01       	movw	r16, r24
+	itoa(joystick, itoa_buffer, 10); //Converts ADC to string
+ a7e:	4a e0       	ldi	r20, 0x0A	; 10
+ a80:	50 e0       	ldi	r21, 0x00	; 0
+ a82:	be 01       	movw	r22, r28
+ a84:	6f 5f       	subi	r22, 0xFF	; 255
+ a86:	7f 4f       	sbci	r23, 0xFF	; 255
+ a88:	0e 94 9a 05 	call	0xb34	; 0xb34 <itoa>
 	lcd_gotoxy(9,1); //Coordinates to print
- a54:	61 e0       	ldi	r22, 0x01	; 1
- a56:	89 e0       	ldi	r24, 0x09	; 9
- a58:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
-	lcd_puts(adc_string); //Prints ADC to selected coordinate
- a5c:	ce 01       	movw	r24, r28
- a5e:	01 96       	adiw	r24, 0x01	; 1
- a60:	0e 94 91 04 	call	0x922	; 0x922 <lcd_puts>
+ a8c:	61 e0       	ldi	r22, 0x01	; 1
+ a8e:	89 e0       	ldi	r24, 0x09	; 9
+ a90:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
+	lcd_puts(itoa_buffer); //Prints ADC to selected coordinate
+ a94:	ce 01       	movw	r24, r28
+ a96:	01 96       	adiw	r24, 0x01	; 1
+ a98:	0e 94 91 04 	call	0x922	; 0x922 <lcd_puts>
 	OCR1A = joystick*13 + 800; //Sends a scaled ADC value to PB1 to create an appropriate waveform for the servo.
- a64:	0f 2e       	mov	r0, r31
- a66:	fd e0       	ldi	r31, 0x0D	; 13
- a68:	df 2e       	mov	r13, r31
- a6a:	f0 2d       	mov	r31, r0
- a6c:	d0 9e       	mul	r13, r16
- a6e:	c0 01       	movw	r24, r0
- a70:	d1 9e       	mul	r13, r17
- a72:	90 0d       	add	r25, r0
- a74:	11 24       	eor	r1, r1
- a76:	80 5e       	subi	r24, 0xE0	; 224
- a78:	9c 4f       	sbci	r25, 0xFC	; 252
- a7a:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
- a7e:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
+ a9c:	0f 2e       	mov	r0, r31
+ a9e:	fd e0       	ldi	r31, 0x0D	; 13
+ aa0:	df 2e       	mov	r13, r31
+ aa2:	f0 2d       	mov	r31, r0
+ aa4:	d0 9e       	mul	r13, r16
+ aa6:	c0 01       	movw	r24, r0
+ aa8:	d1 9e       	mul	r13, r17
+ aaa:	90 0d       	add	r25, r0
+ aac:	11 24       	eor	r1, r1
+ aae:	80 5e       	subi	r24, 0xE0	; 224
+ ab0:	9c 4f       	sbci	r25, 0xFC	; 252
+ ab2:	90 93 89 00 	sts	0x0089, r25	; 0x800089 <__TEXT_REGION_LENGTH__+0x7f8089>
+ ab6:	80 93 88 00 	sts	0x0088, r24	; 0x800088 <__TEXT_REGION_LENGTH__+0x7f8088>
     		
 	ADMUX |= (1<<MUX0); //Switches from ADC0 to ADC1
- a82:	0c e7       	ldi	r16, 0x7C	; 124
- a84:	10 e0       	ldi	r17, 0x00	; 0
- a86:	f8 01       	movw	r30, r16
- a88:	80 81       	ld	r24, Z
- a8a:	81 60       	ori	r24, 0x01	; 1
- a8c:	80 83       	st	Z, r24
+ aba:	0c e7       	ldi	r16, 0x7C	; 124
+ abc:	10 e0       	ldi	r17, 0x00	; 0
+ abe:	f8 01       	movw	r30, r16
+ ac0:	80 81       	ld	r24, Z
+ ac2:	81 60       	ori	r24, 0x01	; 1
+ ac4:	80 83       	st	Z, r24
 	
 	joystick = startConversion(); //New ADC reading
- a8e:	0e 94 9e 04 	call	0x93c	; 0x93c <startConversion>
- a92:	7c 01       	movw	r14, r24
+ ac6:	0e 94 9e 04 	call	0x93c	; 0x93c <startConversion>
+ aca:	7c 01       	movw	r14, r24
 	lcd_gotoxy(9,3);
- a94:	63 e0       	ldi	r22, 0x03	; 3
- a96:	89 e0       	ldi	r24, 0x09	; 9
- a98:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
-	itoa(joystick, adc_string, 10);
- a9c:	4a e0       	ldi	r20, 0x0A	; 10
- a9e:	50 e0       	ldi	r21, 0x00	; 0
- aa0:	be 01       	movw	r22, r28
- aa2:	6f 5f       	subi	r22, 0xFF	; 255
- aa4:	7f 4f       	sbci	r23, 0xFF	; 255
- aa6:	c7 01       	movw	r24, r14
- aa8:	0e 94 9a 05 	call	0xb34	; 0xb34 <itoa>
-	lcd_puts(adc_string);
- aac:	ce 01       	movw	r24, r28
- aae:	01 96       	adiw	r24, 0x01	; 1
- ab0:	0e 94 91 04 	call	0x922	; 0x922 <lcd_puts>
+ acc:	63 e0       	ldi	r22, 0x03	; 3
+ ace:	89 e0       	ldi	r24, 0x09	; 9
+ ad0:	0e 94 6a 02 	call	0x4d4	; 0x4d4 <lcd_gotoxy>
+	itoa(joystick, itoa_buffer, 10);
+ ad4:	4a e0       	ldi	r20, 0x0A	; 10
+ ad6:	50 e0       	ldi	r21, 0x00	; 0
+ ad8:	be 01       	movw	r22, r28
+ ada:	6f 5f       	subi	r22, 0xFF	; 255
+ adc:	7f 4f       	sbci	r23, 0xFF	; 255
+ ade:	c7 01       	movw	r24, r14
+ ae0:	0e 94 9a 05 	call	0xb34	; 0xb34 <itoa>
+	lcd_puts(itoa_buffer);
+ ae4:	ce 01       	movw	r24, r28
+ ae6:	01 96       	adiw	r24, 0x01	; 1
+ ae8:	0e 94 91 04 	call	0x922	; 0x922 <lcd_puts>
 	OCR1B = joystick*13 + 800;
- ab4:	de 9c       	mul	r13, r14
- ab6:	c0 01       	movw	r24, r0
- ab8:	df 9c       	mul	r13, r15
- aba:	90 0d       	add	r25, r0
- abc:	11 24       	eor	r1, r1
- abe:	80 5e       	subi	r24, 0xE0	; 224
- ac0:	9c 4f       	sbci	r25, 0xFC	; 252
- ac2:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
- ac6:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
+ aec:	de 9c       	mul	r13, r14
+ aee:	c0 01       	movw	r24, r0
+ af0:	df 9c       	mul	r13, r15
+ af2:	90 0d       	add	r25, r0
+ af4:	11 24       	eor	r1, r1
+ af6:	80 5e       	subi	r24, 0xE0	; 224
+ af8:	9c 4f       	sbci	r25, 0xFC	; 252
+ afa:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <__TEXT_REGION_LENGTH__+0x7f808b>
+ afe:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <__TEXT_REGION_LENGTH__+0x7f808a>
     		
 	ADMUX &= ~(1<<MUX0); //Switches from ADC1 back to ADC0
- aca:	f8 01       	movw	r30, r16
- acc:	80 81       	ld	r24, Z
- ace:	8e 7f       	andi	r24, 0xFE	; 254
- ad0:	80 83       	st	Z, r24
-  }
- ad2:	a0 cf       	rjmp	.-192    	; 0xa14 <main+0xae>
+ b02:	f8 01       	movw	r30, r16
+ b04:	80 81       	ld	r24, Z
+ b06:	8e 7f       	andi	r24, 0xFE	; 254
+ b08:	80 83       	st	Z, r24
+	
 
-00000ad4 <__vector_1>:
+  }
+ b0a:	84 cf       	rjmp	.-248    	; 0xa14 <main+0xae>
+
+00000b0c <__vector_1>:
   return 0;
   
 }
 
 ISR(INT0_vect){
- ad4:	1f 92       	push	r1
- ad6:	0f 92       	push	r0
- ad8:	0f b6       	in	r0, 0x3f	; 63
- ada:	0f 92       	push	r0
- adc:	11 24       	eor	r1, r1
- ade:	2f 93       	push	r18
- ae0:	3f 93       	push	r19
- ae2:	4f 93       	push	r20
- ae4:	5f 93       	push	r21
- ae6:	6f 93       	push	r22
- ae8:	7f 93       	push	r23
- aea:	8f 93       	push	r24
- aec:	9f 93       	push	r25
- aee:	af 93       	push	r26
- af0:	bf 93       	push	r27
- af2:	ef 93       	push	r30
- af4:	ff 93       	push	r31
-	lcd_clrscr();
- af6:	0e 94 77 02 	call	0x4ee	; 0x4ee <lcd_clrscr>
+ b0c:	1f 92       	push	r1
+ b0e:	0f 92       	push	r0
+ b10:	0f b6       	in	r0, 0x3f	; 63
+ b12:	0f 92       	push	r0
+ b14:	11 24       	eor	r1, r1
+ b16:	8f 93       	push	r24
+ b18:	9f 93       	push	r25
 	lcd_puts("interrupt!!");
- afa:	84 e1       	ldi	r24, 0x14	; 20
- afc:	91 e0       	ldi	r25, 0x01	; 1
- afe:	0e 94 91 04 	call	0x922	; 0x922 <lcd_puts>
-	/*OCR1A = 800;
-	OCR1B = 5000;*/
-	lcd_clrscr();
- b02:	0e 94 77 02 	call	0x4ee	; 0x4ee <lcd_clrscr>
+	OCR1A = 800;
+	OCR1B = 5000;
+	lcd_clrscr();*/
+	//intCount++;
 	cliflag = 1;
- b06:	81 e0       	ldi	r24, 0x01	; 1
- b08:	90 e0       	ldi	r25, 0x00	; 0
- b0a:	90 93 23 01 	sts	0x0123, r25	; 0x800123 <cliflag+0x1>
- b0e:	80 93 22 01 	sts	0x0122, r24	; 0x800122 <cliflag>
- b12:	ff 91       	pop	r31
- b14:	ef 91       	pop	r30
- b16:	bf 91       	pop	r27
- b18:	af 91       	pop	r26
- b1a:	9f 91       	pop	r25
- b1c:	8f 91       	pop	r24
- b1e:	7f 91       	pop	r23
- b20:	6f 91       	pop	r22
- b22:	5f 91       	pop	r21
- b24:	4f 91       	pop	r20
- b26:	3f 91       	pop	r19
- b28:	2f 91       	pop	r18
+ b1a:	81 e0       	ldi	r24, 0x01	; 1
+ b1c:	90 e0       	ldi	r25, 0x00	; 0
+ b1e:	90 93 2d 01 	sts	0x012D, r25	; 0x80012d <cliflag+0x1>
+ b22:	80 93 2c 01 	sts	0x012C, r24	; 0x80012c <cliflag>
+ b26:	9f 91       	pop	r25
+ b28:	8f 91       	pop	r24
  b2a:	0f 90       	pop	r0
  b2c:	0f be       	out	0x3f, r0	; 63
  b2e:	0f 90       	pop	r0
