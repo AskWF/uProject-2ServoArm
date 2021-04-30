@@ -24,7 +24,7 @@ static inline void initTimer1Servo(void) {
 
 
 static inline void initADC(void) {
-	ADCSRA |= (1<<ADEN) | (1<<ADIE); //ADEN togglet til 1 gir oss ADC enabled,  ADIE aktiverer ADC interrupts
+	ADCSRA |= (1<<ADEN); //ADEN togglet til 1 gir oss ADC enabled
 	ADCSRA |= (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2); //Setter ADC klokka til 125kHz hvis systemklokka er 16mHz
 	ADMUX |=  (1<<ADLAR) |(1<<REFS0);  //Toggle AVCC reference and ADLAR
 	DIDR0 |=  (1<<ADC0D)|(1<<ADC1D);	//Digital input disable på pin A0 og A1 på arduino.
@@ -56,10 +56,10 @@ int main(void){
 	lcd_gotoxy(0,1);          // set cursor to first column at line 3
 	lcd_puts("0_0");
   
-	OCR1A = 4000;
+	//OCR1A = 4000;
 	_delay_ms(1000);
 	lcd_clrscr();
-	OCR1A = 2000;
+	//OCR1A = 2000;
 	_delay_ms(1000);
 
   
@@ -102,5 +102,6 @@ ISR(INT0_vect){
 	lcd_puts("interrupt!!");
 	/*OCR1A = 800;
 	OCR1B = 5000;*/
+	lcd_clrscr();
 	cliflag = 1;
 }
