@@ -7,10 +7,10 @@
 #include "util/delay.h"
 #include "avr/interrupt.h"
 
-//OLED can display 21 characters in each row and 7 rows down.
+//IMPORTANT NOTE: OLED can display 21 characters in each row and 7 rows down.
 
-int cliflag = 0;
-int intCount = 0;
+uint8_t cliflag = 0; //Flag for interrupt button debounce
+uint8_t intCount = 0; //Counts how many times interrupt button has been pressed
 
 static inline void initTimer1Servo(void) {
 	/* Set up Timer1 (16bit) to give a pulse every 20ms */
@@ -25,8 +25,8 @@ static inline void initTimer1Servo(void) {
 
 
 static inline void initADC(void) {
-	ADCSRA |= (1<<ADEN); //ADEN togglet til 1 gir oss ADC enabled
-	ADCSRA |= (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2); //Setter ADC klokka til 125kHz hvis systemklokka er 16mHz
+	ADCSRA |= (1<<ADEN); //Enable ADC
+	ADCSRA |= (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2); //Sets the ADC clock to 125kHz when the system clock is 16mHz
 	ADMUX |=  (1<<ADLAR) |(1<<REFS0);  //Toggle AVCC reference and ADLAR
 	DIDR0 |=  (1<<ADC0D)|(1<<ADC1D);	//Digital input disable på pin A0 og A1 på arduino.
 	startConversion();
@@ -35,19 +35,19 @@ static inline void initADC(void) {
 int startConversion(void){
 	ADCSRA |= (1<<ADSC); //Start ADC conversion
 	do {} while (ADCSRA & (1<<ADSC)); //Wait until ADC has finished reading
-	int adc_result = ADCH;
+	int adc_result = ADCH; //Saves result for later use
 	return adc_result;
 }
 
 void initInterrupt0(void){
-	EIMSK = (1<<INT0);
-	EICRA = (1<<ISC01);
-	PORTD = (1<<PORTD2);
+	EIMSK = (1<<INT0); //Enables interrupts on INT0/PD2
+	EICRA = (1<<ISC01); //Enable falling edge interrupt
+	PORTD = (1<<PORTD2); //Internal pullup on PD2
 }
 
 
 int main(void){
-	lcd_init(LCD_DISP_ON);    // init lcd and turn on
+	lcd_init(LCD_DISP_ON);    
 	initADC();
 	initTimer1Servo();
 	initInterrupt0();
