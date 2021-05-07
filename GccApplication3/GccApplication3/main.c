@@ -57,10 +57,8 @@ int main(void){
 	lcd_gotoxy(0,1);          // set cursor to first column at line 3
 	lcd_puts("0_0");
   
-	//OCR1A = 4000;
 	_delay_ms(1000);
-	lcd_clrscr();
-	//OCR1A = 2000;
+	lcd_clrscr(); //Clears the LCD before entering main loop.
 	_delay_ms(1000);
 
   
@@ -73,14 +71,14 @@ int main(void){
 		sei(); //Set external interrupts
 	}
 	else{
-		cli(); //Close
+		cli(); //Closes interrupts
 		intCount++;
 		itoa(intCount, itoa_buffer, 10);
-		lcd_gotoxy(0,6);
+		lcd_gotoxy(0,6); //starts printing the counter status to the OLED.
 		lcd_puts("Interrupt counter: ");
 		lcd_puts(itoa_buffer);
-		_delay_ms(200);
-		cliflag = 0;
+		_delay_ms(200); //200ms delay to debounce button.
+		cliflag = 0; //resets the cliflag so interrupts are enabled on next iteration.
 	}
 	   
 	joystick = startConversion(); //New ADC reading
@@ -106,11 +104,5 @@ int main(void){
 }
 
 ISR(INT0_vect){
-	/*lcd_clrscr();
-	lcd_puts("interrupt!!");
-	OCR1A = 800;
-	OCR1B = 5000;
-	lcd_clrscr();*/
-	//intCount++;
-	cliflag = 1;
+	cliflag = 1; //Setting this flag prompts the debouncing functionality in the main loop
 }
