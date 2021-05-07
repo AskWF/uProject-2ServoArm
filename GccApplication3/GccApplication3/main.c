@@ -29,7 +29,6 @@ static inline void initADC(void) {
 	ADCSRA |= (1<<ADPS0) | (1<<ADPS1) | (1<<ADPS2); //Sets the ADC clock to 125kHz when the system clock is 16mHz
 	ADMUX |=  (1<<ADLAR) |(1<<REFS0);  //Toggle AVCC reference and ADLAR
 	DIDR0 |=  (1<<ADC0D)|(1<<ADC1D);	//Digital input disable på pin A0 og A1 på arduino.
-	startConversion();
 }
 
 int startConversion(void){
